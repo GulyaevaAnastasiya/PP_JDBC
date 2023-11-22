@@ -48,7 +48,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() {
     }
 
-    Connection connection = Util.getConnection();
+    public static Connection connection = Util.getConnection();
 
     @Override
     public void createUsersTable() {
