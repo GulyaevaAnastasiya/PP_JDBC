@@ -50,7 +50,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 e.printStackTrace();
             }
         }
-        }
+    }
 
     @Override
     public void removeUserById(long id) {
@@ -88,7 +88,10 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery("DELETE FROM users").executeUpdate();
             transaction.commit();
         } catch (RuntimeException e) {
-            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+                e.printStackTrace();
+            }
         }
     }
 }
